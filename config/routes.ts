@@ -1,16 +1,19 @@
 export default [
   {
     path: '/',
+    icon: 'HomeOutlined',
     component: '@/pages/index',
     name: '首页',
   },
   {
     path: '/user',
+    icon: 'UserOutlined',
     component: '@/pages/user',
     name: '用户',
   },
   {
     path: '/stu',
+    icon: 'TeamOutlined',
     name: '学员管理',
     routes: [
       {
@@ -22,6 +25,23 @@ export default [
         path: '/stu/public',
         component: '@/pages/stu/public',
         name: '学员录入',
+      },
+    ],
+  },
+  {
+    path: '/category',
+    icon: 'TagsOutlined',
+    name: '分类管理',
+    routes: [
+      {
+        path: '/category/list',
+        component: '@/pages/category/categoryList',
+        name: '分类列表',
+      },
+      {
+        path: '/category/public',
+        component: '@/pages/category/categoryPublic',
+        name: '分类发布',
       },
     ],
   },
