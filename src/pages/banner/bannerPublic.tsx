@@ -1,8 +1,8 @@
-import { categoryAdd } from '@/api/cake';
 import { Button, Form, Input, Select, notification, Spin } from 'antd';
 import React from 'react';
 import { history, useRequest } from 'umi';
-
+import ImgUpload from '@/components/imgUpload';
+import { bannerAdd } from '@/api/banner';
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -11,9 +11,9 @@ const layout = {
 const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
-const CategoryPublic: React.FC = () => {
+const BannerPublic: React.FC = () => {
   const [form] = Form.useForm();
-  let { data, loading, run } = useRequest((values) => categoryAdd(values), {
+  let { data, loading, run } = useRequest((values) => bannerAdd(values), {
     manual: true,
     onSuccess: (result, params) => {
       onReset();
@@ -56,11 +56,25 @@ const CategoryPublic: React.FC = () => {
         style={{ maxWidth: 600 }}
       >
         <Form.Item
-          name="categoryName"
-          label="分类名称"
+          name="bannerName"
+          label="活动名称"
           rules={[{ required: true }]}
         >
           <Input />
+        </Form.Item>
+        <Form.Item
+          name="bannerUrl"
+          label="活动链接"
+          rules={[{ required: true }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="bannerLink"
+          label="活动图片"
+          rules={[{ required: true }]}
+        >
+          <ImgUpload />
         </Form.Item>
 
         <Form.Item {...tailLayout}>
@@ -76,4 +90,4 @@ const CategoryPublic: React.FC = () => {
   );
 };
 
-export default CategoryPublic;
+export default BannerPublic;

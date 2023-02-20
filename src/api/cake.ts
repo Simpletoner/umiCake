@@ -1,11 +1,15 @@
 import { request } from 'umi';
-// 分类接口
-interface category {
-  name: string;
-}
+
+//  分类列表分页
+export const categoryPage = (cateObj: any) => {
+  return request('/classes/category', {
+    method: 'get',
+    params: cateObj,
+  });
+};
 
 //  新增分类
-export const categoryAdd = (cateObj: category) => {
+export const categoryAdd = (cateObj: any) => {
   return request('/classes/category', {
     method: 'post',
     data: cateObj,

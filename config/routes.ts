@@ -45,4 +45,21 @@ export default [
       },
     ],
   },
+  {
+    path: '/banner',
+    icon: 'BarcodeOutlined',
+    name: '轮播管理',
+    routes: [
+      {
+        path: '/banner/list',
+        component: '@/pages/banner/bannerList',
+        name: '轮播列表',
+      },
+      {
+        path: '/banner/public',
+        component: '@/pages/banner/bannerPublic',
+        name: '轮播发布',
+      },
+    ],
+  },
 ];

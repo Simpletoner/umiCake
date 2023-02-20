@@ -1,3 +1,5 @@
+import { message } from 'antd';
+import '@/utils/init_leanCloud_sdk';
 export const request = {
   timeout: 1000,
   requestInterceptors: [
@@ -18,6 +20,9 @@ export const request = {
     async (response: any, options: any) => {
       let res = await response.json();
       console.log('res', res);
+      if (res.objectId && options.method.toUpperCase() == 'POST') {
+        message.success('新增成功！');
+      }
       // console.log(response.json());
       return res; //此处return的内容就是后端返回的数据包
     },
