@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { message, Upload } from 'antd';
 import type { UploadChangeParam } from 'antd/es/upload';
@@ -22,10 +22,13 @@ const beforeUpload = (file: RcFile) => {
   return isJpgOrPng && isLt2M;
 };
 
-const ImgUpload: React.FC = () => {
+const ImgUpload: React.FC = (props: any) => {
+  console.log(props.value);
+
+  useEffect(() => {}, []);
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState<string>();
-
+  // setImageUrl(props.value);
   const handleChange: UploadProps['onChange'] = (
     info: UploadChangeParam<UploadFile>,
   ) => {
@@ -56,6 +59,7 @@ const ImgUpload: React.FC = () => {
       // file.save()  往leancloud上传文件的接口
       file.save().then((result: any) => {
         setImageUrl(result.attributes.url);
+        props.onChange(result.attributes.url);
       });
     });
 

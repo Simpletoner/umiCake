@@ -1,5 +1,11 @@
 export default [
   {
+    path: '/login',
+    component: '@/pages/login/index',
+    name: '登录',
+    layout: false,
+  },
+  {
     path: '/',
     icon: 'HomeOutlined',
     component: '@/pages/index',
@@ -59,6 +65,12 @@ export default [
         path: '/banner/public',
         component: '@/pages/banner/bannerPublic',
         name: '轮播发布',
+      },
+      {
+        path: '/banner/edit',
+        component: '@/pages/banner/bannerEdit',
+        name: '轮播编辑',
+        hideInMenu: true,
       },
     ],
   },

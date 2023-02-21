@@ -1,8 +1,8 @@
 import { Button, Form, Input, Select, notification, Spin } from 'antd';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { history, useRequest } from 'umi';
 import ImgUpload from '@/components/imgUpload';
-import { bannerAdd } from '@/api/banner';
+import { bannerAdd, bannerEdit } from '@/api/banner';
 const layout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -11,14 +11,27 @@ const layout = {
 const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
-const BannerPublic: React.FC = () => {
+const BannerEdit: React.FC = (props: any) => {
   const [form] = Form.useForm();
-  let { data, loading, run } = useRequest((values) => bannerAdd(values), {
-    manual: true,
-    onSuccess: (result, params) => {
-      onReset();
+  let { data, loading, run } = useRequest(
+    (values) => bannerEdit(values, values.objectId),
+    {
+      manual: true,
+      onSuccess: (result, params) => {
+        onReset();
+      },
     },
-  });
+  );
+  let initData = {
+    bannerName: '',
+    bannerUrl: '',
+    bannerLink: '',
+  };
+  useEffect(() => {
+    let { query } = props.location;
+    console.log('props', props.location.query);
+    form.setFieldsValue(query);
+  }, []);
   console.log(data, loading);
   const onFinish = (values: any) => {
     console.log(values);
@@ -45,11 +58,7 @@ const BannerPublic: React.FC = () => {
   const onReset = () => {
     form.resetFields();
   };
-  let initData = {
-    bannerName: '五一活动',
-    bannerUrl: 'https://www.baidu.com',
-    bannerLink: '',
-  };
+
   return (
     <Spin spinning={loading}>
       <Form
@@ -84,7 +93,7 @@ const BannerPublic: React.FC = () => {
 
         <Form.Item {...tailLayout}>
           <Button type="primary" htmlType="submit">
-            提交
+            确定修改
           </Button>
           <Button htmlType="button" onClick={onReset}>
             重置
@@ -95,4 +104,4 @@ const BannerPublic: React.FC = () => {
   );
 };
 
-export default BannerPublic;
+export default BannerEdit;

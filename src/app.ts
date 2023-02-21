@@ -24,7 +24,21 @@ export const request = {
         message.success('新增成功！');
       }
       // console.log(response.json());
-      return res; //此处return的内容就是后端返回的数据包
+      return {
+        code: 200,
+        msg: '成功',
+        data: res.results,
+      }; //此处return的内容就是后端返回的数据包
     },
   ],
 };
+
+// 全局初始化函数的运行时配置
+export async function getInitialState() {
+  let userState = {
+    isLogin: false,
+    userInfo: null,
+  };
+  console.log('getInitialState');
+  return userState;
+}
