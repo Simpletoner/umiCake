@@ -4,6 +4,7 @@ export default [
     component: '@/pages/login/index',
     name: '登录',
     layout: false,
+    hideInMenu: true,
   },
   {
     path: '/',

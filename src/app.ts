@@ -1,5 +1,11 @@
 import { message } from 'antd';
 import '@/utils/init_leanCloud_sdk';
+import {
+  BasicLayoutProps,
+  Settings as LayoutSettings,
+} from '@ant-design/pro-layout';
+import { history } from 'umi';
+
 export const request = {
   timeout: 1000,
   requestInterceptors: [
@@ -20,14 +26,17 @@ export const request = {
     async (response: any, options: any) => {
       let res = await response.json();
       console.log('res', res);
-      if (res.objectId && options.method.toUpperCase() == 'POST') {
+      if (res.sessionToken) {
+        message.success('登录成功！');
+      } else if (res.objectId && options.method.toUpperCase() == 'POST') {
         message.success('新增成功！');
       }
       // console.log(response.json());
+      let { result } = res;
       return {
         code: 200,
         msg: '成功',
-        data: res.results,
+        data: result ? result : res,
       }; //此处return的内容就是后端返回的数据包
     },
   ],
@@ -39,6 +48,36 @@ export async function getInitialState() {
     isLogin: false,
     userInfo: null,
   };
+  let userInfo =
+    localStorage.getItem('userInfo') || sessionStorage.getItem('userInfo');
+  console.log(userInfo);
+  if (userInfo) {
+    userState = {
+      isLogin: true,
+      userInfo: JSON.parse(userInfo),
+    };
+  }
   console.log('getInitialState');
   return userState;
 }
+
+export const layout = ({ initialState }) => {
+  console.log(initialState);
+  return {
+    onPageChange: () => {
+      let { isLogin } = initialState;
+      console.log(isLogin);
+      if (!isLogin) {
+        history.push('/login');
+      } else {
+        if (history.location.pathname == '/login') {
+          history.push('/');
+        } else {
+          history.push(history.location.pathname);
+        }
+        console.log(history);
+        // if(history)
+      }
+    },
+  };
+};
