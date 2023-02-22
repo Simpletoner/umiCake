@@ -75,4 +75,26 @@ export default [
       },
     ],
   },
+  {
+    path: '/dvatest',
+    icon: 'BarcodeOutlined',
+    name: 'dva测试',
+    routes: [
+      {
+        path: '/dvatest/ca',
+        component: '@/pages/dvatest/cA',
+        name: 'A',
+      },
+      {
+        path: '/dvatest/cb',
+        component: '@/pages/dvatest/cb',
+        name: 'B',
+      },
+      {
+        path: '/dvatest/notice',
+        component: '@/pages/dvatest/notice',
+        name: '消息列表',
+      },
+    ],
+  },
 ];

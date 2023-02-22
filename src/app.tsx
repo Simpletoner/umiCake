@@ -5,12 +5,12 @@ import {
   Settings as LayoutSettings,
 } from '@ant-design/pro-layout';
 import { history } from 'umi';
-
+import HeaderDropdown from './components/HeaderDropdown';
 export const request = {
   timeout: 1000,
   requestInterceptors: [
     // 请求拦截
-    (url: string, options: any): any => {
+    (url: string, options: any) => {
       console.log(url, options);
       options.url = 'https://azf3ih55.lc-cn-n1-shared.com/1.1' + url;
       options.headers = {
@@ -79,5 +79,6 @@ export const layout = ({ initialState }) => {
         // if(history)
       }
     },
+    rightContentRender: () => <HeaderDropdown />,
   };
 };

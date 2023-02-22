@@ -19,4 +19,8 @@ export default defineConfig({
     dark: false,
   },
   fastRefresh: {},
+  dva: {
+    immer: false,
+    hmr: true,
+  },
 });
