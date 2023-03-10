@@ -10,7 +10,8 @@ export default [
     path: '/',
     icon: 'HomeOutlined',
     component: '@/pages/index',
-    name: '首页',
+    access: 'isRoot',
+    name: '数据统计',
   },
   {
     path: '/user',
@@ -22,6 +23,7 @@ export default [
     path: '/stu',
     icon: 'TeamOutlined',
     name: '学员管理',
+    access: 'isUser',
     routes: [
       {
         path: '/stu/list',
@@ -39,6 +41,7 @@ export default [
     path: '/category',
     icon: 'TagsOutlined',
     name: '分类管理',
+    access: 'isAdmin',
     routes: [
       {
         path: '/category/list',
@@ -56,6 +59,7 @@ export default [
     path: '/banner',
     icon: 'BarcodeOutlined',
     name: '轮播管理',
+    access: 'isAdmin',
     routes: [
       {
         path: '/banner/list',
@@ -79,6 +83,7 @@ export default [
     path: '/dvatest',
     icon: 'BarcodeOutlined',
     name: 'dva测试',
+    access: 'isUser',
     routes: [
       {
         path: '/dvatest/ca',
@@ -96,5 +101,29 @@ export default [
         name: '消息列表',
       },
     ],
+  },
+  {
+    path: '/system',
+    icon: 'BarcodeOutlined',
+    name: '系统管理',
+    access: 'isRoot',
+    routes: [
+      {
+        path: '/system/role',
+        component: '@/pages/system/role',
+        name: '角色管理',
+      },
+      {
+        path: '/system/user',
+        component: '@/pages/system/user',
+        name: '用户管理',
+      },
+    ],
+  },
+  {
+    path: '/area',
+    icon: 'BarcodeOutlined',
+    component: '@/pages/area/index',
+    name: '配送区域',
   },
 ];

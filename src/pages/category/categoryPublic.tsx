@@ -1,7 +1,7 @@
 import { categoryAdd } from '@/api/cake';
 import { Button, Form, Input, Select, notification, Spin } from 'antd';
 import React from 'react';
-import { history, useRequest } from 'umi';
+import { history, useAccess, useRequest } from 'umi';
 
 const layout = {
   labelCol: { span: 8 },
@@ -12,6 +12,8 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 const CategoryPublic: React.FC = () => {
+  const access = useAccess();
+  console.log(access);
   const [form] = Form.useForm();
   let { data, loading, run } = useRequest((values) => categoryAdd(values), {
     manual: true,

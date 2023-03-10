@@ -28,6 +28,7 @@ const Notice: React.FC = () => {
             <a key="list-loadmore-more">more</a>,
           ]}
         >
+          9
           <Skeleton avatar title={false} loading={false} active>
             <List.Item.Meta
               avatar={<Avatar src={item.picture} />}
